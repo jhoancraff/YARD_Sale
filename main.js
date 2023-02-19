@@ -6,10 +6,13 @@ const categoriaMobile = document.querySelector('.mobile-menu')
 const menuCarritoIcon = document.querySelector('.navbar-shopping-cart')
 const aside = document.querySelector('.product-detail')
 const cardProduct = document.querySelector('.cards-container')
+const closeAside = document.querySelector('.porfavor')
+
 
 emailDespiegue.addEventListener('click', toggleDesktopMenu)
 menuIconoMobile.addEventListener('click', toogleCtegorias)
 menuCarritoIcon.addEventListener('click', toogleCarrito)
+closeAside.addEventListener('click', closeAsideCarrito)
 
 
 function toggleDesktopMenu(){
@@ -17,6 +20,8 @@ function toggleDesktopMenu(){
     if (!isDesktopMenuClose){
         aside.classList.add('inactiva')
     }
+
+    if (!isDesktopMenuClose){}
     desktopMenu.classList.toggle('inactiva')
     
     
@@ -40,12 +45,34 @@ function toogleCarrito(){
     if(!isCarritoClosed){
         desktopMenu.classList.add('inactiva')
     }
+    if (!isCarritoClosed){
+        closeAside.classList.add('inactiva')
+    }
 
     aside.classList.toggle('inactiva')
-
+    
    
     
 }
+
+function openProductAside(){
+    
+    
+    closeAside.classList.remove('inactiva')
+    
+}
+
+function closeAsideCarrito(){
+    const isAsideClosed = aside.classList.contains('inactiva')
+    if (!isAsideClosed){
+        aside.classList.add('inactiva')
+    }
+    
+
+    closeAside.classList.add('inactiva')
+}
+
+
 
 
 
@@ -53,19 +80,19 @@ const productoLista = [];
 productoLista.push({
     nombre: 'Bike',
     precio: 120,
-    imagen: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    imagen: '/logos/D_NQ_NP_786773-MLV45673700255_042021-V.jpg'
 
 })
 productoLista.push({
-    nombre: 'Carro',
+    nombre: 'Car',
     precio: 11120,
-    imagen: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    imagen: './logos/corolla-2020-1-3.png'
     
 })
 productoLista.push({
-    nombre: 'Moto',
+    nombre: 'Motocycle',
     precio: 1932,
-    imagen: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    imagen: '/logos/Moto-Fratelli-FS-110-Semi-automatica-1.jpg'
     
 })
 
@@ -74,6 +101,7 @@ function renderFuntion(lista){
     for(producto of lista){
         const productCard = document.createElement('div')
         productCard.classList.add('product-card')
+        productCard.addEventListener('click', openProductAside)
     
         const img = document.createElement('img')
         img.setAttribute('src', producto.imagen )
@@ -107,8 +135,11 @@ function renderFuntion(lista){
         productCard.appendChild(img)
     
         cardProduct.appendChild(productCard)
+        
+}
+
+
     
-    }
 }
 
 renderFuntion(productoLista)
